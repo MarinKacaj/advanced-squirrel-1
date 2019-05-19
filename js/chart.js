@@ -31,16 +31,20 @@ var chart = c3.generate({
     },
 });
 
-fetch('/.netlify/functions/shares')
-  .then(function (response) {
-  	return response.json();
-  })
-  .then(function (data) { 
-  	console.log(data);
-  	return data;
-  })
-  .then(function (data) {
-  	chart.load({
-  		columns: data
-  	});
-  });
+function fetchShares() {
+    fetch('/.netlify/functions/shares')
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) { 
+            console.log(data);
+        return data;
+        })
+        .then(function (data) {
+            chart.load({
+                columns: data
+            });
+        });
+}
+
+setTimeout(fetchShares, 1000)
